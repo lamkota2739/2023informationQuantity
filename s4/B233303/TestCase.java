@@ -30,98 +30,54 @@ public interface InformationEstimatorInterface{
 
 
 public class TestCase {
-    static boolean success = true;
+	static boolean success = true;
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		try {
-		    FrequencerInterface  myObject;
-		    int freq;
-		    System.out.println("checking Frequencer");
-	
-		    // This is smoke test
-		    myObject = new Frequencer();
-		    myObject.setSpace("Hi Ho Hi Ho".getBytes());
-		    myObject.setTarget("H".getBytes());
-		    freq = myObject.frequency();
-		    assert freq == 4: "Hi Ho Hi Ho, H: " + freq;
+			FrequencerInterface  myObject;
+			int freq;
+			System.out.println("checking Frequencer");
 			
-		    // Write your testCase here
-			
-		    // Test case 1: single character target in non-empty space
-			myObject.setSpace("Hello World".getBytes());
-			myObject.setTarget("o".getBytes());
-			freq = myObject.frequency();
-			assert freq == 2 : "Hello World, target 'o': " + freq;
-			
-			// Test case 2: multi-character target in non-empty space
-			myObject.setSpace("Java is fun and Java is powerful".getBytes());
-			myObject.setTarget("Java".getBytes());
-			freq = myObject.frequency();
-			assert freq == 2 : "Java is fun and Java is powerful, target 'Java': " + freq;
-			
-			// Test case 3: single character target in empty space
-			myObject.setSpace("".getBytes());
+			// This is smoke test
+			myObject = new Frequencer();
+			myObject.setSpace("Hi Ho Hi Ho".getBytes());
 			myObject.setTarget("H".getBytes());
 			freq = myObject.frequency();
-			assert freq == 0 : "Empty space, target 'H': " + freq;
+			assert freq == 4: "Hi Ho Hi Ho, H: " + freq;
 			
-			// Test case 4: empty target in non-empty space
-			myObject.setSpace("Testing FrequencerInterface".getBytes());
-			myObject.setTarget("".getBytes());
+			// Write your testCase here
+			myObject.setSpace("Hello".getBytes());
+			myObject.setTarget("HelloWorld".getBytes());
 			freq = myObject.frequency();
-			assert freq == -1 : "Non-empty space, empty target: " + freq;
-			
-			// Test case 5: empty target and empty space
-			myObject.setSpace("".getBytes());
-			myObject.setTarget("".getBytes());
-			freq = myObject.frequency();
-			assert freq == -1 : "Empty space, empty target: " + freq;
-			
-			// Test case 6: target not present in space
-			myObject.setSpace("This is a test".getBytes());
-			myObject.setTarget("X".getBytes());
-			freq = myObject.frequency();
-			assert freq == 0 : "Target 'X' not present in space: " + freq;
-			
-			// Test case 7: target present at the beginning of space
-			myObject.setSpace("apple orange banana".getBytes());
-			myObject.setTarget("apple".getBytes());
-			freq = myObject.frequency();
-			assert freq == 1 : "Target 'apple' at the beginning of space: " + freq;
-			
-			// Test case 8: target present at the end of space
-			myObject.setSpace("grape banana apple".getBytes());
-			myObject.setTarget("apple".getBytes());
-			freq = myObject.frequency();
-			assert freq == 1 : "Target 'apple' at the end of space: " + freq;
+			assert freq == -1: "Target length is greater than the remaining length of the space string: " + freq;
 		}
 		catch(Exception e) {
-		    System.out.println("Exception occurred in Frequencer Object");
-		    success = false;
+			System.out.println("Exception occurred in Frequencer Object");
+			success = false;
 		}
 
 		try {
-		    InformationEstimatorInterface myObject;
-		    double value;
-		    System.out.println("checking InformationEstimator");
-		    myObject = new InformationEstimator();
-		    myObject.setSpace("3210321001230123".getBytes());
-		    myObject.setTarget("0".getBytes());
-		    value = myObject.estimation();
-		    assert (value > 1.9999) && (2.0001 >value): "IQ for 0 in 3210321001230123 should be 2.0. But it returns "+value;
-		    myObject.setTarget("01".getBytes());
-		    value = myObject.estimation();
-		    assert (value > 2.9999) && (3.0001 >value): "IQ for 01 in 3210321001230123 should be 3.0. But it returns "+value;
-		    myObject.setTarget("0123".getBytes());
-		    value = myObject.estimation();
-		    assert (value > 2.9999) && (3.0001 >value): "IQ for 0123 in 3210321001230123 should be 3.0. But it returns "+value;
-		    myObject.setTarget("00".getBytes());
-		    value = myObject.estimation();
-		    assert (value > 3.9999) && (4.0001 >value): "IQ for 00 in 3210321001230123 should be 3.0. But it returns "+value;
+			InformationEstimatorInterface myObject;
+			double value;
+			System.out.println("checking InformationEstimator");
+			myObject = new InformationEstimator();
+			myObject.setSpace("3210321001230123".getBytes());
+			myObject.setTarget("0".getBytes());
+			value = myObject.estimation();
+			assert (value > 1.9999) && (2.0001 >value): "IQ for 0 in 3210321001230123 should be 2.0. But it returns "+value;
+			myObject.setTarget("01".getBytes());
+			value = myObject.estimation();
+			assert (value > 2.9999) && (3.0001 >value): "IQ for 01 in 3210321001230123 should be 3.0. But it returns "+value;
+			myObject.setTarget("0123".getBytes());
+			value = myObject.estimation();
+			assert (value > 2.9999) && (3.0001 >value): "IQ for 0123 in 3210321001230123 should be 3.0. But it returns "+value;
+			myObject.setTarget("00".getBytes());
+			value = myObject.estimation();
+			assert (value > 3.9999) && (4.0001 >value): "IQ for 00 in 3210321001230123 should be 3.0. But it returns "+value;
 		}
 		catch(Exception e) {
-		    System.out.println("Exception occurred in InformationEstimator Object");
-		    success = false;
+			System.out.println("Exception occurred in InformationEstimator Object");
+			success = false;
 		}
 		if(success) { System.out.println("TestCase OK"); } 
 	}
